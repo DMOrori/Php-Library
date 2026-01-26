@@ -1,21 +1,22 @@
 <?php
-/*checking if the form is submitted*/
+// i checked if the form was submitted and the number of students
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['num_students'])) {
     $num_students = (int)$_POST['num_students'];
     $students = [];
 
-    // 2. Loop through each student to process marks [cite: 6, 31]
+    // looping through each student
     for ($i = 0; $i < $num_students; $i++) {
+        //getting the student details
         $name = $_POST['name'][$i];
         $math = (float)$_POST['math'][$i];
         $english = (float)$_POST['english'][$i];
         $science = (float)$_POST['science'][$i];
 
-        // 3. Perform Calculations [cite: 9, 11, 12]
+        // i calculated the total average
         $total = $math + $english + $science;
         $average = $total / 3;
 
-        /*using If... Else [cite: 13, 14, 32] */
+        /*using If else statement */
         if ($average >= 80) {
             $grade = "A";
         } elseif ($average >= 70) {
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['num_students'])) {
             $grade = "F";
         }
 
-        // 5. Store in Array [cite: 29]
+        // i created an empty list to store students
         $students[] = [
             'name' => $name,
             'math' => $math,
@@ -45,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['num_students'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Grade Report</title>
+    <title>Grade Of Students</title>
     <style>
         table { border-collapse: collapse; width: 80%; margin: 20px 0; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
@@ -56,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['num_students'])) {
 
     <form method="GET">
         <label>Enter Number of Students:</label>
-        <input type="number" name="count" required>
+        <input type="number" name="count" required> <br>
         <button type="submit">Set Students</button>
     </form>
 
@@ -71,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['num_students'])) {
             Science: <input type="number" name="science[]" required>
             <br>
         <?php endfor; ?>
-        <br><button type="submit">Calculate Grades</button>
+        <br><button type="submit" >Calculate Grades</button>
     </form>
     <?php endif; ?>
 
