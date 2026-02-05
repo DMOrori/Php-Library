@@ -4,15 +4,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['num_students'])) {
     $num_students = (int)$_POST['num_students'];
     $students = [];
 
-    // looping through each student
+
     for ($i = 0; $i < $num_students; $i++) {
-        //getting the student details
+
         $name = $_POST['name'][$i];
         $math = (float)$_POST['math'][$i];
         $english = (float)$_POST['english'][$i];
         $science = (float)$_POST['science'][$i];
 
-        // i calculated the total average
         $total = $math + $english + $science;
         $average = $total / 3;
 
@@ -29,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['num_students'])) {
             $grade = "F";
         }
 
-        // i created an empty list to store students
+        
         $students[] = [
             'name' => $name,
             'math' => $math,
